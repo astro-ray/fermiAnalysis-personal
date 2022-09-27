@@ -10,15 +10,19 @@ print("This program is strictly for unbinned analysis")
 print("****************************************")
 print("________________________________________\n")
 
-name = input("Enter the name of the source: ")
+
+#The source name input should not contain spaces
+name = input("Enter the name of the source (without spaces): ")
 
 data = open(name + "_data.txt", "r")
 print(data.read())
 
+#A way to automatically input the FAVA catalogue ID
 catalogue = {'NGC125' : '3FGL J0319.8+4130',
     '4C+21.35': '3FGL J1224.9+2122',
     '3C279' : '3FGL J1256.1-0547'
 }
+#cat_id = catalogue[name]
 
 cat_id = input("Enter the FAVA catalogue id of the source: ")
 
@@ -183,9 +187,9 @@ print(like)
 print(like.tol)
 
 if like.tolType == 1:
-    print("Tolerance type: Absolute")
+    print("Tolerance type: Absolute\n")
 else:
-    print("Tolerance type: Relative")
+    print("Tolerance type: Relative\n")
 
 like.tol = float(input("Enter the preferred tolerance value: "))
 likeobj = pyLike.NewMinuit(like.logLike)
@@ -196,9 +200,9 @@ like.fit
 like.plot()
 
 if likeobj.getRetCode() == 0:
-    print("The likelihood analysis didn't converge")
+    print("The likelihood analysis didn't converge\n")
 else:
-    print("The likelihood analysis converged succesfully")
+    print("The likelihood analysis converged succesfully\n")
 
 print("Model fit parameters: ")
 print(like.model[cat_id])
